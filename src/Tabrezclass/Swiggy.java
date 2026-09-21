@@ -13,7 +13,6 @@ class Swiggy {
     static int db_price = 0;
 
     public static void main(String[] args) throws Exception {
-
         boolean flag = false;
         do {
             flag = true;
@@ -22,15 +21,13 @@ class Swiggy {
             System.out.print("Enter the Option: ");
             int ch = sc.nextInt();
 
-
-
             switch (ch) {
                 case 1:
                     signUp();
                     break;
                 case 2:
                     if (acc_exists) {
-                        if (login()) {
+                        if (login()) {//true or false
                             do {
                                 System.out.println("\n------Restaurant------");
                                 System.out.println("1.A2B\n2.Bilal\n3.Buhari\n4.Hotel Paramount\n5.Previous Section");
@@ -38,14 +35,32 @@ class Swiggy {
                                 ch = sc.nextInt();
                                 switch (ch){
                                     case 1:
-                                        a2b();
+                                        if(a2b()){
+                                            flag = false;
+                                            System.out.println("Thank You!");
+                                            return;}
                                         break;
                                     case 2:
+                                       if(bilal()){
+                                        flag = false;
+                                           System.out.println("Thank You!");
+                                        return;}
+                                        break;
                                     case 3:
+                                        if(buhari()){
+                                            flag = false;
+                                            System.out.println("Thank You!");
+                                            return;}
+                                        break;
                                     case 4:
+                                        if(hotelParamount()){
+                                            flag = false;
+                                            System.out.println("Thank You!");
+                                            return;}
+                                        break;
                                     case 5:
                                         System.out.println("Redirecting....");
-                                        Thread.sleep(2000);
+                                        Thread.sleep(1000);
                                         flag = false;
                                         break;
                                 }
@@ -53,6 +68,7 @@ class Swiggy {
                             flag = true;
                             break;
                         }
+                        break;
                     } else {
                         System.out.println("Create Account to Login");
                         break;
@@ -83,11 +99,10 @@ class Swiggy {
         if (!acc_exists) {
             System.out.print("Enter UID: ");
             db_uid = sc.nextInt();
-            System.out.print("\nEnter pwd: ");
+            System.out.print("Enter pwd: ");
             db_pwd = sc.nextInt();
-            System.out.print("\nEnter your registered mobile no: ");
+            System.out.print("Enter your registered mobile no: ");
             db_contact = sc.nextLong();
-
             acc_exists = true;
             return;
         } else {
@@ -99,7 +114,7 @@ class Swiggy {
     static boolean login() throws Exception {
         System.out.print("Enter uid: ");
         int uid = sc.nextInt();
-        System.out.print("\nEnter pwd: ");
+        System.out.print("Enter pwd: ");
         int pwd = sc.nextInt();
         Thread.sleep(1000);
         if (uid == db_uid && pwd == db_pwd) {
@@ -137,7 +152,7 @@ class Swiggy {
     }
 
     static boolean OTP() throws Exception{
-        OTP = (long) (Math.random() * 9999) / 2;
+        OTP = (long) (Math.random() * 9999+9999) / 2;
         System.out.println("OTP Sent...");
         Thread.sleep(2000);
         System.out.println("OTP Received: " + OTP);
@@ -155,52 +170,200 @@ class Swiggy {
         }
     }
 
-    static void a2b() throws Exception{
-        System.out.println("----a2b menu---");
-        System.out.println("1.sambar rice \n2.paneer friedrice\n3.veg meals\n4.Order Confirm\n5.Previous Option");
-        System.out.print("Enter your Food: ");
-        int ch = sc.nextInt();
-        boolean flag;
-       switch (ch){
-           case 1:
+    static boolean a2b() throws Exception{
 
-               db_price +=  quality(db_qty);
-               System.out.println("Total amt:"+db_price);
-               do{
-                   flag = true;
-                   System.out.println("1.Gpay\n2.phonepe\n3.Bhim Upi\n4.Previous Option");
-                   System.out.println("Enter your choice: ");
-                   ch = sc.nextInt();
+        boolean flag = false;
+        do{
+            flag = true;
+            System.out.println("----a2b menu---");
+            System.out.println("1.Sambar Rice\n2.Paneer Friedrice\n3.Veg Meals\n4.Order Confirm\n5.Previous Option");
+            System.out.print("Enter your Food: ");
+            int ch = sc.nextInt();
 
-                   switch(ch){
-                       case 1:
-                           paymentGateway(db_price,"Gpay");
-                           break;
-                   }
-               }while(flag);
-               break;
-           case 2:
-           case 3:
-           case 4: flag = false;
-       }
+            switch (ch){
+                case 1:
+                    db_price +=  quality(db_qty,220);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 2:
+                    db_price +=  quality(db_qty,320);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 3:
+                    db_price +=  quality(db_qty,200);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 4:
+                    if(upiPlatform()) return true;
+                    else break;
+
+               case 5:
+
+                    flag = false;
+            }
+        }while(flag);
+        return false;
     }
 
-    static int quality(int qty){
+    static boolean bilal() throws Exception{
+
+        boolean flag = false;
+        do{
+            flag = true;
+            System.out.println("----Bilal Menu---");
+            System.out.println("1.Chicken Biryani\n2.Mandi\n3.Mutton Biryani\n4.Order Confirm\n5.Previous Option");
+            System.out.print("Enter your Food: ");
+            int ch = sc.nextInt();
+
+            switch (ch){
+                case 1:
+                    db_price +=  quality(db_qty,250);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 2:
+                    db_price +=  quality(db_qty,320);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 3:
+                    db_price +=  quality(db_qty,440);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 4:
+                    if(upiPlatform()) return true;
+                    else break;
+                case 5:
+
+                    flag = false;
+            }
+        }while(flag);
+        return false;
+    }
+
+    static boolean buhari() throws Exception{
+
+        boolean flag = false;
+        do{
+            flag = true;
+            System.out.println("----Buhari menu---");
+            System.out.println("1.Chicken Biryani\n2.Mutton Biryani\n3.Prawn Biryani\n4.Order Confirm\n5.Previous Option");
+            System.out.print("Enter your Food: ");
+            int ch = sc.nextInt();
+
+            switch (ch){
+                case 1:
+                    db_price +=  quality(db_qty,300);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 2:
+                    db_price +=  quality(db_qty,520);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 3:
+                    db_price +=  quality(db_qty,600);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 4:
+                    if(upiPlatform()) return true;
+                    else break;
+
+                case 5:
+
+                    flag = false;
+            }
+        }while(flag);
+        return false;
+    }
+
+    static boolean hotelParamount() throws Exception{
+
+        boolean flag = false;
+        do{
+            flag = true;
+            System.out.println("----Hotel Paramount menu---");
+            System.out.println("1.Chicken Mugal Biryani\n2.Chicken Plate Shavarma\n3.Barbeque\n4.Order Confirm\n5.Previous Option");
+            System.out.print("Enter your Food: ");
+            int ch = sc.nextInt();
+
+            switch (ch){
+                case 1:
+                    db_price +=  quality(db_qty,360);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 2:
+                    db_price +=  quality(db_qty,170);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 3:
+                    db_price +=  quality(db_qty,460);
+                    System.out.println("Total amount:"+db_price);
+                    break;
+                case 4:
+                    if(upiPlatform()) return true;
+                    else break;
+
+                case 5:
+                    flag = false;
+            }
+        }while(flag);
+        return false;
+    }
+
+    static int quality(int qty,int rate){
         System.out.print("Enter Quantity: ");
-        db_qty = sc.nextInt();
-       return  qty * 480;
+        qty = sc.nextInt();
+        return  qty * rate;
     }
 
-    static void paymentGateway(int p,String pl) throws Exception{
-        System.out.println("-----payment process-----");
-        System.out.print("Confirm Order (y/n): ");
-        char ch = sc.next().charAt(0);
-        Thread.sleep(3000);
-        switch(ch){
-            case 'y':
-            case 'n':
-                System.out.println("Payment Cancelled");
-                return ;
-        }
+
+    static Boolean upiPlatform() throws Exception{
+        boolean flag = true;
+        do{
+            System.out.println("1.Gpay\n2.phonepe\n3.Bhim Upi\n4.Previous Option");
+            System.out.println("Enter your choice: ");
+            int ch = sc.nextInt();
+
+            switch(ch){
+                case 1:
+                    return paymentGateway(db_price,"Gpay");
+                case 2:
+                   return paymentGateway(db_price,"Phonepe");
+                case 3:
+                    return paymentGateway(db_price,"Bhim Upi");
+                case 4:
+                    flag = false;
+                    break;
+            }
+        }while(flag);
+        return false;
     }
+    
+    static boolean paymentGateway(int p,String pl) throws Exception{
+        boolean flag = false;
+        do{
+            System.out.println("-----payment process-----");
+            System.out.println("Total Amount: "+p+"\nPayment Gateway: "+pl);
+            System.out.printf("Order Amount :%d (y/n) Confirm :",p);
+            char ch = sc.next().charAt(0);
+
+            Thread.sleep(2000);
+
+            switch(ch){
+                case 'y':
+                    System.out.println("Order Placed");
+                    db_price = 0;
+                    return true;
+                case 'n':
+                    System.out.println("Order Cancelled");
+                    db_price = 0;
+                    return true;
+                default:
+                    flag = true;
+                    System.out.println("Invalid option.Try again!");
+                    break;
+            }
+        }while(flag);
+        return false;
+    }
+
+
 }
