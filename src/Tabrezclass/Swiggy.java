@@ -377,11 +377,11 @@ class Swiggy {
                         System.out.printf("\nOrder Amount :%d (y/n) Confirm :", p);
                         char ch = sc.next().charAt(0);
                         switch (ch) {
-                            case 'y':
+                            case 'y','Y':
                                 System.out.println("Order Placed");
                                 db_price = 0;
                                 return true;
-                            case 'n':
+                            case 'n','N':
                                 System.out.println("Order Cancelled");
                                 db_price = 0;
                                 return true;
