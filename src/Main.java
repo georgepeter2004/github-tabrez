@@ -70,4 +70,8 @@ public class Main {
         return digit;
     }
 
+    static void kk(){
+
+    }
+
 }
