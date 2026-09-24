@@ -11,5 +11,7 @@ public class even {
             System.out.print(i+" ");
         }
     }
+    Scanner sc = new Scanner(System.in);
+
 }
 
